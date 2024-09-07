@@ -5,13 +5,13 @@ The **all_records_pull.py** script is responsible for making API calls using pre
 
 <h3>How It Works</h3>
 
- **API Authentication**:
+- **API Authentication**:
     The script authenticates using OAuth2 credentials (client ID, client secret, username, password), which are loaded from environment variables.
- **Query Processing**:
+- **Query Processing**:
     It processes multiple queries (defined in the queries module) by sending requests to the API and handling the response data.
- **Logging**:
+- **Logging**:
     Logging is configured for debugging and tracking script execution.
- **Log File Management**:
+- **Log File Management**:
     The script compresses old log files located in a specified directory to manage disk space.
 
 <h3>classes.py</h3>
@@ -29,17 +29,17 @@ The AccessTokenHandler class in **classes.py** is designed to manage API authent
 
 **Methods**
 
- **__init__**:
+- **__init__**:
     Initializes the AccessTokenHandler class with API credentials and cache file location.
- **load_token()**:
+- **load_token()**:
     Attempts to load the cached token from the specified cache file. Returns the token data if available and valid; otherwise, returns None.
- **save_token(token_response)**:
+- **save_token(token_response)**:
     Saves the token response to the cache file. It calculates the expiration time by adding the expires_in value (in seconds) to the current time.
- **is_token_valid(token_response)**:
+- **is_token_valid(token_response)**:
     Checks if the token is still valid by comparing the current time to the token’s expiration timestamp (expires_at field). Returns True if the token is valid, False otherwise.
- **get_cached_token()**:
+- **get_cached_token()**:
     Retrieves the access token from the cache if it exists and is still valid. Returns the token string or None if no valid token is found.
- **refresh_token()**:
+- **refresh_token()**:
     Makes an API request to refresh the access token if the cached token is invalid or expired. It requires the auth_url, client_id, client_secret, username, and password to be set.
     On success, the new token is saved to the cache, and the token is returned. On failure, it prints an error message and returns None.
 
@@ -58,20 +58,20 @@ The configure_logger function creates and returns a logger instance that logs me
 
 **How It Works:**
 
- **Log Directory Creation**:
+- **Log Directory Creation**:
     The function checks if the log directory (Documents/Dossier7_Files/Logs) exists on the user's system. If it does not exist, it creates the directory using the utils.create_directory_if_not_exists_log() utility function.
- **Log File Name**:
+- **Log File Name**:
     A log file is created with a dynamic timestamp (in the format YYYY-MM-DD_HH-MM-SS) to ensure unique log file names.
- **Logger Configuration**:
+- **Logger Configuration**:
     A logger instance is initialized with the script_name.
     The logger is configured to log messages at the DEBUG level (the most detailed logging level).
- **Handlers**:
+- **Handlers**:
     The logger has two handlers:
        **File Handler**: Logs all messages to a .txt file inside the Logs directory.
        **Stream Handler**: Outputs log messages to the console (standard output).
- **Log Format**:
+- **Log Format**:
     Each log message is formatted with a timestamp, the logger's name (script_name), the log level, and the message.
- **Returns:**
+- **Returns:**
    The configured logger instance, which can be used to log messages from the script.
 
 <h3>queries.py</h3>
@@ -85,18 +85,18 @@ This file is structured to allow seamless integration with API handling logic in
 
 The file contains a Python list called queries, where each item in the list is a dictionary representing an API query. Each dictionary includes the following components:
 
-**Fields in Each Query:**
+-**Fields in Each Query:**
 
- **name**: A string representing the name of the query. This is used to identify what data the query is fetching (e.g., "assets", "part_usage").
- **result_type**: Specifies the type of data returned. It could be entity (representing individual objects) or transactional (representing transactional records).
- **payload**: This dictionary contains the parameters that control how the query is executed, including:
-    **page**: The page number of the results (used for pagination).
-    **amount**: The number of records to return per page.
-    **groupBy**: An empty list (if no grouping is applied).
-    **filter**: A set of filters applied to the query to retrieve only relevant records.
-    **orderBy**: Specifies the sorting order of the results.
-    **expands**: Specifies which related fields to expand (nested objects).
- **baseUrl**: The API endpoint to which the query is sent.
+- **name**: A string representing the name of the query. This is used to identify what data the query is fetching (e.g., "assets", "part_usage").
+- **result_type**: Specifies the type of data returned. It could be entity (representing individual objects) or transactional (representing transactional records).
+- **payload**: This dictionary contains the parameters that control how the query is executed, including:
+   - **page**: The page number of the results (used for pagination).
+   - **amount**: The number of records to return per page.
+   - **groupBy**: An empty list (if no grouping is applied).
+   - **filter**: A set of filters applied to the query to retrieve only relevant records.
+   - **orderBy**: Specifies the sorting order of the results.
+   - **expands**: Specifies which related fields to expand (nested objects).
+- **baseUrl**: The API endpoint to which the query is sent.
 
  <h3>requirements.txt</h3>
 
@@ -137,19 +137,19 @@ The file contains a Python list called queries, where each item in the list is a
 
 **main()**
 
- **Setup**:
+- **Setup**:
     Configures logging using gen_config.configure_logger().
     Loads environment variables from a .env file using utils.load_env_file().
     Retrieves authentication credentials and access token.
- **API Call Setup**:
+- **API Call Setup**:
     Defines the initial_query payload for the API request.
     Configures pagination and processing of the API response.
- **API Calls**:
+- **API Calls**:
     Makes API calls to fetch data, handling pagination to collect all available pages.
     Measures and prints the time taken for each call.
- **Data Processing**:
+- **Data Processing**:
     Saves the collected data to an Excel file using the utils.process_data_to_df_checklists() function.
- **Completion**:
+- **Completion**:
     Prints the total time taken for the entire operation and completion message.
 
  <h3>work_rqsts.py</h3>
@@ -186,20 +186,20 @@ The work_rqsts.py script is designed to interact with an API to retrieve work re
 
 **main()**
 
- **Setup**:
+- **Setup**:
     Configures the script for execution.
     Initializes the token handler using classes.AccessTokenHandler to manage authentication tokens.
- **Token Management**:
+- **Token Management**:
     Attempts to load a cached token and check its validity.
     If the token is invalid or not present, refreshes it using the authentication credentials.
- **API Requests**:
+- **API Requests**:
     Configures the query parameters for the API request.
     Makes paginated API requests to retrieve work request data.
     Measures and prints the time taken for each page of data retrieval.
- **File Operations**:
+- **File Operations**:
     Creates a directory for storing results if it does not exist.
     Saves the retrieved data to a CSV file with a timestamped filename.
- **Completion**:
+- **Completion**:
     Prints the total execution time and a completion message.
 
 

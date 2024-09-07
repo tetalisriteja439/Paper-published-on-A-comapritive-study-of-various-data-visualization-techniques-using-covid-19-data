@@ -1,9 +1,9 @@
 
-<h3>all_records_pull.py</h3>
+<h2>all_records_pull.py</h2>
 
 The **all_records_pull.py** script is responsible for making API calls using predefined queries, processing the data, and handling logging functionalities. This script works in conjunction with other modules such as gen_config, utils, work_rqsts, scratch2 and queries to automate the process of retrieving data from an API and handling log file management.
 
-<h3>How It Works</h3>
+<h2>How It Works</h2>
 
 - **API Authentication**:
     The script authenticates using OAuth2 credentials (client ID, client secret, username, password), which are loaded from environment variables.
@@ -14,7 +14,7 @@ The **all_records_pull.py** script is responsible for making API calls using pre
 - **Log File Management**:
     The script compresses old log files located in a specified directory to manage disk space.
 
-<h3>classes.py</h3>
+<h2>classes.py</h2>
 
 The AccessTokenHandler class in **classes.py** is designed to manage API authentication tokens. It handles retrieving cached tokens, saving new tokens, checking token validity, and refreshing tokens when necessary.
 
@@ -43,7 +43,7 @@ The AccessTokenHandler class in **classes.py** is designed to manage API authent
     Makes an API request to refresh the access token if the cached token is invalid or expired. It requires the auth_url, client_id, client_secret, username, and password to be set.
     On success, the new token is saved to the cache, and the token is returned. On failure, it prints an error message and returns None.
 
-<h3>gen_config.py</h3>
+<h2>gen_config.py</h2>
 
 The **gen_config.py** file is responsible for configuring a logging system for Python scripts. It sets up a logger that writes log messages both to a dynamically named log file and the console. This logging utility helps with tracking the execution and debugging of scripts in a structured and easily accessible format.
 
@@ -74,7 +74,7 @@ The configure_logger function creates and returns a logger instance that logs me
 - **Returns:**
    The configured logger instance, which can be used to log messages from the script.
 
-<h3>queries.py</h3>
+<h2>queries.py</h2>
 
 The **queries.py** file defines a set of pre-configured queries used for making API requests to various endpoints of a system such as assets, part_usage, parts_in_storerooms, personnel, sites, tasks, preventive_mx_comp, purchase_orders, time_segments, top_level_parts, work_ord and many others. Each query is represented as a dictionary that contains information like the API endpoint, filters, ordering, and expanded fields to be included in the API call.
 
@@ -98,11 +98,11 @@ The file contains a Python list called queries, where each item in the list is a
    - **expands**: Specifies which related fields to expand (nested objects).
 - **baseUrl**: The API endpoint to which the query is sent.
 
- <h3>requirements.txt</h3>
+ <h2>requirements.txt</h2>
 
    The **requirements.txt** packages contain the required packages to run the project. Use this file to install the necessary dependencies.
 
- <h3>scratch2.py</h3>
+ <h2>scratch2.py</h2>
 
    The **scratch2.py** script is designed to make API calls to retrieve data about interactive lists and save the results to an Excel file. It uses token-based authentication to interact with the API, handles pagination to retrieve all available data, and processes the data into a structured format for output.
 
@@ -152,7 +152,7 @@ The file contains a Python list called queries, where each item in the list is a
 - **Completion**:
     Prints the total time taken for the entire operation and completion message.
 
- <h3>work_rqsts.py</h3>
+ <h2>work_rqsts.py</h2>
 
 The work_rqsts.py script is designed to interact with an API to retrieve work request data, process it, and save it to a CSV file. The script handles token-based authentication, paginated API requests, and file operations.
 
